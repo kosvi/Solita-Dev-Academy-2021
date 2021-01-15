@@ -17,16 +17,81 @@ class Names {
       case "-n":
         this.printNamesAlpabetically(virtualConsole);
         break;
+      case "-a":
+        if (params.length > 1) {
+          this.amounts(virtualConsole, params[1]);
+        } else {
+          this.printHelp(virtualConsole);
+        }
+        break;
       default:
         this.printHelp(virtualConsole);
         break;
     }
   }
 
+  amounts(virtualConsole, param) {
+    switch (param) {
+      case "all":
+        this.printNamesByAmount(virtualConsole);
+        break;
+      case "total":
+        this.printTotalAmount(virtualConsole);
+        break;
+      default:
+        this.printNameWithAmount(virtualConsole, param);
+        break;
+    }
+  }
+
+  async printTotalAmount(virtualConsole) {
+    var amount;
+    try {
+      amount = await NamesApi.getData("/api?page=3");
+    } catch (error) {
+      amount = null;
+    }
+    if (amount != null) {
+      virtualConsole.addLine("  " + amount.amount);
+    }
+  }
+
+  async printNameWithAmount(virtualConsole, name) {
+    var amount;
+    try {
+      amount = await NamesApi.getData("/api?page=4&name=" + name);
+    } catch (error) {
+      amount = null;
+    }
+    if (amount != null) {
+      virtualConsole.addLine("  " + amount.name + "\t\t" + amount.amount);
+    }
+  }
+
+  async printNamesByAmount(virtualConsole) {
+    var names;
+    try {
+      names = await NamesApi.getData("/api?page=1");
+    } catch (error) {
+      names = null;
+    }
+    if (names != null) {
+      for (let i = 0; i < names.names.length; i++) {
+        var space = "";
+        if (names.names[i].name.length >= 6) {
+          space = "\t";
+        } else {
+          space = "\t\t";
+        }
+        virtualConsole.addLine("  " + names.names[i].name + space + names.names[i].amount);
+      }
+    }
+  }
+
   async printNamesAlpabetically(virtualConsole) {
     var names;
     try {
-      names = await NamesApi.getNamesAlphabetically();
+      names = await NamesApi.getData("/api?page=2");
     } catch (error) {
       names = null;
     }
@@ -143,9 +208,9 @@ document.addEventListener('keypress', function (event) {
 });
 
 class NamesApi {
-  static async getNamesAlphabetically() {
+  static async getData(url) {
     try {
-      const response = await fetch("/api?page=2");
+      const response = await fetch(url);
       const json = await response.json();
       return json;
     } catch (error) {
