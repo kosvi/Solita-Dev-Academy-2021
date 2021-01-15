@@ -52,7 +52,7 @@ class Names {
       amount = null;
     }
     if (amount != null) {
-      virtualConsole.addLine("  " + amount.amount);
+      virtualConsole.addLine("  Total amount of names: " + amount.amount);
     }
   }
 
@@ -64,6 +64,7 @@ class Names {
       amount = null;
     }
     if (amount != null) {
+      virtualConsole.addLine("  Name:\t\tAmount:");
       virtualConsole.addLine("  " + amount.name + "\t\t" + amount.amount);
     }
   }
@@ -76,6 +77,7 @@ class Names {
       names = null;
     }
     if (names != null) {
+      virtualConsole.addLine("  Name:\t\tAmount:");
       for (let i = 0; i < names.names.length; i++) {
         var space = "";
         if (names.names[i].name.length >= 6) {
@@ -96,6 +98,7 @@ class Names {
       names = null;
     }
     if (names != null) {
+      virtualConsole.addLine("  Namelist:");
       for (let i = 0; i < names.names.length; i++) {
         virtualConsole.addLine("  " + names.names[i]);
       }
@@ -104,6 +107,9 @@ class Names {
 
   printHelp(virtualConsole) {
     virtualConsole.addLine("Usage: names [OPTIONS] [expression]");
+    virtualConsole.addLine("");
+    virtualConsole.addLine("Example: names -a Ville");
+    virtualConsole.addLine("");
     virtualConsole.addLine(" Options: ");
     virtualConsole.addLine("   -a      - get amounts");
     virtualConsole.addLine("    all      all names & amounts");
@@ -147,6 +153,8 @@ class Console {
       let pos = this.hiddenRealInput.value.length;
       this.hiddenRealInput.setSelectionRange(pos, pos);
     }, 500);
+    // finally print help to console
+    this.commands["help"].run(this, "");
   }
 
   runCommand() {
@@ -182,6 +190,7 @@ class Console {
     for (let i = 0; i < this.lines.length; i++) {
       this.output.innerHTML += this.lines[i] + "<br >";
     }
+    document.getElementById("content").scrollTop = document.getElementById("content").scrollHeight;
   }
 
   clear() {

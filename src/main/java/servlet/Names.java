@@ -17,9 +17,6 @@ public class Names extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		NameList nameList = new NameList();
-
-		// go for the default action
-		request.setAttribute("names", nameList.getNamesByAmount());
 		request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 	}
 
