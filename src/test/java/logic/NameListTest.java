@@ -39,7 +39,7 @@ class NameListTest {
 
 	@Test
 	void getNumberOfNamesTest() {
-		assertEquals(20, nameList.getNumberOfNames());
+		assertEquals(211, nameList.getNumberOfNames());
 	}
 
 	@Test

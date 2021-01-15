@@ -9,25 +9,14 @@
 <link rel="stylesheet" href="/styles/style.css">
 </head>
 <body>
-<button onClick="listNames()">Alphabetically</button>
-	<div id="content">
-		<table>
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Amount</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${names }" var="name">
-					<tr>
-						<td><c:out value="${name }" /></td>
-						<td><c:out value="${name.getAmount() }" /></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+	<input type="text" id="hiddenInput" autocomplete="false" autofocus />
+	<div id="content" class="console">
+		<div id="output"></div>
+		<div id="input">
+			<span id="inputSign"></span><span id="inputField"></span><span
+				id="inputCursor"></span>
+		</div>
 	</div>
-	<script src="/js/editContent.js"></script>
+	<script src="/js/console.js"></script>
 </body>
 </html>

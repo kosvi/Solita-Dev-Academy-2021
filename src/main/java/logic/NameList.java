@@ -3,15 +3,10 @@ package logic;
 import model.Name;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -44,7 +39,7 @@ public class NameList {
 			return null;
 		}
 		// get the number of names and create String array of that size
-		int totalAmount = this.getNumberOfNames();
+		int totalAmount = names.size();
 		String[] nameArray = new String[totalAmount];
 		// ... and add all names to that array
 		for (int i = 0; i < totalAmount; i++) {
@@ -58,7 +53,11 @@ public class NameList {
 	public int getNumberOfNames() {
 		try {
 			List<Name> names = this.readDataFromFile();
-			return names.size();
+			int amount = 0;
+			for (Name n : names) {
+				amount += n.getAmount();
+			}
+			return amount;
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 			return -1;
