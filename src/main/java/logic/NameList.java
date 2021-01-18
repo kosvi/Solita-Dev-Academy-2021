@@ -15,8 +15,8 @@ import org.json.simple.parser.ParseException;
 
 public class NameList {
 
-//	private final String FILENAME = System.getenv("NAMES_JSON_FILE");
-	private final String FILENAME = "/home/ldap/ville/Solita/solita2021/names.json";
+	private final String FILENAME = System.getenv("NAMES_JSON_FILE");
+//	private final String FILENAME = "/home/ldap/ville/Solita/solita2021/names.json";
 
 	public List<Name> getNamesByAmount() {
 		List<Name> names;
