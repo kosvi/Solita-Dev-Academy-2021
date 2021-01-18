@@ -4,6 +4,6 @@ In order to apply for Solita Dev Academy, one needed to do a [programming task](
 
 ## Live demo
 
-Live demo can be found at: [solita.codecache.eu](https://solita.codecache.eu)
+Live demo can be found at: [solita.codecache.eu](https://solita.codecache.eu/solita2021)
 
 
